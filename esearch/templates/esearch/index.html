@@ -1,0 +1,75 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+<nav class="navbar navbar-light bg-light">
+  <form class="form-inline">
+
+    <input 
+        class="form-control mr-sm-2" 
+        type="search" placeholder="Title" 
+        aria-label="Title"
+        name = 'title'
+        value = ""
+        style="height: 32px;width: 225px;margin-left: 20px;"
+    >
+    <input 
+        class="form-control mr-sm-2" 
+        type="search" placeholder="Body" 
+        aria-label="Body"
+        name = 'body'
+        value = ""
+        style="height: 32px;width: 225px;margin-left: 20px;"
+    >
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="height: 32px;width: 100px;margin-left: 20px;">Search</button>
+  </form>
+</nav>
+
+{% if results %}
+      <div class="txtCentrado margenSup20 grisDC">
+          <h3>We found {{ count }} result{{ count|pluralize }} for your search </h3>
+           </div>
+               <div class="search results">
+                   {% for mytuple in results %}
+					    <div style='display: flex; justify-content: space-around; width: 40%; font-size: 18px; color: blue;'>
+                            <div>
+                                <span style="margin-top: 20px; ">
+                                    {{ mytuple.0 }}
+                                </span>
+                            </div>
+                            <div>
+                                <span style="margin-top: 20px">
+                                    {{ mytuple.1 }}
+                                </span>
+                            </div>
+                            <div>
+                                <span style="margin-top: 20px">
+                                    {{ mytuple.2 }}
+                                </span>
+                            </div>
+                            <div>
+                                <!-- <form>
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="delete"
+                                        style="height: 28px;width: 100px;margin-left: 20px;"
+                                        onclick=""
+                                    >
+                                        Delete
+                                    </button>
+                                </form> -->
+                                <form method="get">
+                                    <!-- <input type="text" value="8" name="mytextbox" size="1" /> -->
+                                    <input type="submit" class="btn" value="Delete" name="print_btn">
+                                  </form>
+                            </div>
+                            
+						</div>
+						<p></p>
+				   {% endfor %}
+				</div>
+{%elif not search_term %}
+    <h3>Insert your search here.</h3>
+{%elif not results %}
+    <p>No results found.</p>
+{% endif %}
+</html>
+
+
